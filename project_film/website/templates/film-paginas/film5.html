@@ -1,0 +1,73 @@
+{%extends "base.html"%} {%block title%}Captain America Civil War{% endblock %}
+
+{%block content%}
+<main>
+    <div class="image-box">
+        <img src="{{url_for('static', filename='/image/captain-america.jpg')}}"/>
+    </div>
+    <div class="text-box">
+        <h1>Captain America Civil War</h1>
+        <h3>Beschrijving</h3>
+        <div class="beschrijving-box">
+            <p>
+                In Marvel’s Captain America: Civil War zien we Steve Rogers als leider van het nieuw samengestelde Avengers team met het doel om de mensheid te beschermen.
+                <br>
+                <br>
+                Maar na weer een incident waarbij de Avengers betrokken zijn, grijpt de overheid in. Ze zet het team onder politieke druk waardoor ze onder toezicht van een gecontroleerd beleid te werk moeten gaan.
+                <br>
+                <br>
+                Deze nieuwe situatie verdeeld The Avengers in tweeën: het ene team wordt geleid door Steve Rogers en zijn wil om met The Avengers de mensheid te beschermen zonder de bemoeienis van de overheid. Daar tegenover staat Tony Stark met zijn verrassende beslissing om de overheid te steunen. Kies een kant!
+            </p>
+        </div>
+        <p>Cast:</p>
+        {% for acteur in acteurs.items %}
+            {%  if acteur.title == 'Captain America Civil War' %}
+                <p><a href="{{ url_for('acteur', acteur_id=acteur.id)}}">{{ acteur.first_name }} {{ acteur.last_name }} </a> Rol: {{ acteur.name_character }}</p>
+            {%endif%}
+        {% endfor %}
+            <a href="/acteur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Acteur toevoegen</button></a>
+            <p>Regisseur:</p>
+        {% for regisseur in regisseurs.items %}
+            {%  if regisseur.title == 'Captain America Civil War' %}
+                <a href="{{ url_for('regisseur', regisseur_id=regisseur.id)}}">{{ regisseur.first_name }} {{ regisseur.last_name }} <br></a>
+            {%endif%}
+        {% endfor %}
+            <a href="/regisseur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Regisseur toevoegen</button></a>
+        <p>Aantal bezoekers: 7 miljoen</p>
+        <p>Behaalde omzet: 680 miljoen dollar</p>
+    </div>
+    <div class="trailer-box">
+        <iframe src="https://www.youtube.com/embed/dKrVegVI0Us" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</main>
+
+<h3 class="m-5">Reacties</h3>
+<a href="/post/new"><button class="btn btn-warning ml-5 mb-2">Reactie plaatsen</button></a>
+{% for post in posts.items %}
+    {% if post.title == 'Captain America Civil War' %}
+
+<article class="media content-section m-5">
+  <div class="media-body">
+    <div class="article-metadata">
+      <h5><a href="{{ url_for('user_posts', name=post.author.name) }}">{{ post.author.name.title() }}</a> <small>Geplaatst: {{ post.data_posted.strftime('%d-%h-%Y') }}</small></h5>
+
+    </div>
+    <p> Titel: <a class="article-title" href="{{ url_for('post', post_id=post.id)}}" style="text-align: left;">{{ post.title }}</a></p>
+    <p class="article-content">{{ post.content }}</p>
+  </div>
+</article>
+    {%endif%}
+{% endfor %}
+
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+<a class="btn btn-warning ml-5 mb-5" href="{{ url_for('film5', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+<a class="btn btn-outline-warning ml-5 mb-5" href="{{ url_for('film5', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+    ...
+    {% endif %}
+{% endfor %}
+{%endblock%}

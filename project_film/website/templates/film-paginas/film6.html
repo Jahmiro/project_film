@@ -1,0 +1,71 @@
+{%extends "base.html"%} {%block title%}Ant-Man and the Wasp{% endblock %}
+
+{%block content%}
+<main>
+    <div class="image-box">
+        <img src="{{url_for('static', filename='/image/ant-man.jpg')}}"/>
+    </div>
+    <div class="text-box">
+        <h1>Ant-Man and the Wasp</h1>
+        <h3>Beschrijving</h3>
+        <div class="beschrijvig-box">
+            <p>Bijna twee jaar na zijn illegale optreden als superheld in Captain America: Civil War heeft Scott Lang nog een paar dagen te gaan voor zijn enkelband eraf mag en hij zijn huis weer uit mag. Hank Pym en zijn dochter Hope van Dyne hebben in de tussentijd gewerkt aan een tunnel naar de subatomaire wereld. Pyms vrouw Janet leek daar na het onklaar maken van een kernbom in 1987 voorgoed verloren, maar nadat het Lang in zijn strijd tegen Darren Cross gelukt is om daaruit terug te keren, hebben Pym en Van Dyne weer hoop dat ze haar terug kunnen halen. Lang blijkt tijdens zijn subatomaire reis bovendien kwantumverstrengeld te zijn geraakt met Janet. Hierdoor is ze in staat boodschappen achter te laten in zijn dromen. Voor Pym is dit de bevestiging dat Janet nog leeft.
+                <br>
+                <br>
+                Pym en Van Dyne ontvoeren Lang en overtuigen hem ervan dat hij ze moet helpen. Pym heeft nog wel een onderdeel nodig om zijn tunnel naar de subatomaire wereld goed te laten functioneren. Hij hoopt dat te kunnen kopen van zwartemarkthandelaar Sonny Burch. Burch ruikt niettemin zelf geld en probeert Pym en Van Dyne te bestelen van hun technologie. Terwijl zijn mannen en Van Dyne (in een Wasp-pak) vechten om het onderdeel en het tijdelijk tot formaat verhuisdoos verkleinde lab van Pym, duikt er een vrouw op wier lichaam voortdurend schakelt tussen vast en doorzichtig. Zij gaat er met alle technologie vandoor.
+            </p>
+        </div>
+        <p>Cast:</p>
+        {% for acteur in acteurs.items %}
+            {%  if acteur.title == 'Ant-Man and the Wasp' %}
+                <p><a href="{{ url_for('acteur', acteur_id=acteur.id)}}">{{ acteur.first_name }} {{ acteur.last_name }} </a> Rol: {{ acteur.name_character }}</p>
+            {%endif%}
+        {% endfor %}
+            <a href="/acteur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Acteur toevoegen</button></a>
+            <p>Regisseur:</p>
+        {% for regisseur in regisseurs.items %}
+            {%  if regisseur.title == 'Ant-Man and the Wasp' %}
+                <a href="{{ url_for('regisseur', regisseur_id=regisseur.id)}}">{{ regisseur.first_name }} {{ regisseur.last_name }} <br></a>
+            {%endif%}
+        {% endfor %}
+            <a href="/regisseur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Regisseur toevoegen</button></a>
+        <p>Aantal bezoekers: 3 miljoen</p>
+        <p>Behaalde omzet: 430 miljoen dollar</p>
+    </div>
+    <div class="trailer-box">
+        <iframe src="https://www.youtube.com/embed/UUkn-enk2RU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</main>
+
+<h3 class="m-5">Reacties</h3>
+<a href="/post/new"><button class="btn btn-warning ml-5 mb-2">Reactie plaatsen</button></a>
+{% for post in posts.items %}
+    {% if post.title == 'Ant-Man and the Wasp' %}
+
+<article class="media content-section m-5">
+  <div class="media-body">
+    <div class="article-metadata">
+      <h5><a href="{{ url_for('user_posts', name=post.author.name) }}">{{ post.author.name.title() }}</a> <small>Geplaatst: {{ post.data_posted.strftime('%d-%h-%Y') }}</small></h5>
+
+    </div>
+    <p> Titel: <a class="article-title" href="{{ url_for('post', post_id=post.id)}}" style="text-align: left;">{{ post.title }}</a></p>
+    <p class="article-content">{{ post.content }}</p>
+  </div>
+</article>
+    {%endif%}
+{% endfor %}
+
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+<a class="btn btn-warning ml-5 mb-5" href="{{ url_for('film6', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+<a class="btn btn-outline-warning ml-5 mb-5" href="{{ url_for('film6', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+6...
+    {% endif %}
+{% endfor %}
+
+
+{%endblock%}

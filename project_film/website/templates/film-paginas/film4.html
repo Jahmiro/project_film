@@ -1,0 +1,72 @@
+{%extends "base.html"%} {%block title%}Thor Ragnarok{% endblock %}
+
+{%block content%}
+<main>
+    <div class="image-box">
+        <img src="{{url_for('static', filename='/image/thor-ragnarok.jpg')}}"/>
+    </div>
+    <div class="text-box">
+        <h1>Thor Ragnarok</h1>
+        <h3>Beschrijving</h3>
+        <div class="beschrijving-box">
+            <p>In Marvel’s Thor: Ragnarok verliest Thor zijn magische hamer en wordt hij gevangen genomen aan de andere kant van het universum – terwijl Asgard wordt bedreigd door Ragnarok.
+                <br>
+                <br>
+                Marvel’s Thor: Ragnarok vervolgt de avonturen van Thor die voor een nieuwe bedreiging komt te staan - de meedogenloze Hela. Thor verliest zijn magische hamer en wordt gevangen genomen aan de andere kant van het universum.
+                <br>
+                <br>
+                Het wordt voor hem een race tegen de klok om op tijd terug te komen in Asgard om Ragnarok – de verwoesting van Asgard en het einde van de beschaving – te stoppen. Hiervoor moet Thor alleen eerst een dodelijke gladiator strijd overleven, waarbij hij recht tegenover zijn voormalig bondgenoot en mede-Avenger de Incredible Hulk komt te staan.
+            </p>
+        </div>
+        <p>Cast:</p>
+        {% for acteur in acteurs.items %}
+            {%  if acteur.title == 'Thor Ragnarok' %}
+                <p><a href="{{ url_for('acteur', acteur_id=acteur.id)}}">{{ acteur.first_name }} {{ acteur.last_name }} </a> Rol: {{ acteur.name_character }}</p>
+            {%endif%}
+        {% endfor %}
+            <a href="/acteur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Acteur toevoegen</button></a>
+            <p>Regisseur:</p>
+        {% for regisseur in regisseurs.items %}
+            {%  if regisseur.title == 'Thor Ragnarok' %}
+                <a href="{{ url_for('regisseur', regisseur_id=regisseur.id)}}">{{ regisseur.first_name }} {{ regisseur.last_name }} <br></a>
+            {%endif%}
+        {% endfor %}
+            <a href="/regisseur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Regisseur toevoegen</button></a>
+        <p>Aantal bezoekers: 12 miljoen</p>
+        <p>Behaalde omzet: 1,012 miljard dollar</p>
+    </div>
+    <div class="trailer-box">
+        <iframe src="https://www.youtube.com/embed/ue80QwXMRHg" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</main>
+
+<h3 class="m-5">Reacties</h3>
+<a href="/post/new"><button class="btn btn-warning ml-5 mb-2">Reactie plaatsen</button></a>
+{% for post in posts.items %}
+    {% if post.title == 'Thor Ragnarok' %}
+
+<article class="media content-section m-5">
+  <div class="media-body">
+    <div class="article-metadata">
+      <h5><a href="{{ url_for('user_posts', name=post.author.name) }}">{{ post.author.name.title() }}</a> <small>Geplaatst: {{ post.data_posted.strftime('%d-%h-%Y') }}</small></h5>
+
+    </div>
+    <p> Titel: <a class="article-title" href="{{ url_for('post', post_id=post.id)}}" style="text-align: left;">{{ post.title }}</a></p>
+    <p class="article-content">{{ post.content }}</p>
+  </div>
+</article>
+    {%endif%}
+{% endfor %}
+
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+<a class="btn btn-warning ml-5 mb-5" href="{{ url_for('film4', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+<a class="btn btn-outline-warning ml-5 mb-5" href="{{ url_for('film4', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+    ...
+    {% endif %}
+{% endfor %}
+{%endblock%}

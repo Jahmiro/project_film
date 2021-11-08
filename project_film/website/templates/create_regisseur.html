@@ -1,0 +1,61 @@
+{%extends "base.html"%} {%block title%}Acteur toevoegen{% endblock %}
+
+{%block content%}
+
+<form class="bg-transparent" " method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">{{legend}}</legend>
+        <!--Voornaam-->
+        <div class="form-group">
+            <div class="form-group">
+                {{ form.first_name.label }}
+                {% if form.first_name.errors %}
+                    {{ form.first_name(class="is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.first_name.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.first_name }}
+                {% endif %}
+            </div>
+        
+        <!--Achternaam-->
+        <div class="form-group">
+            {{ form.last_name.label }}
+            {% if form.last_name.errors %}
+                {{ form.last_name(class="is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.last_name.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.last_name }}
+            {% endif %}
+        </div>
+
+        <!--Titel-->
+        <div class="form-group">
+            {{ form.title.label }}
+            <div class="form-group">
+                {% if form.title.errors %}
+                    {{ form.title(class="is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title }}
+                {% endif %}
+            </div>
+    </fieldset>
+
+    <div class="form-group" style="padding-bottom: 300px;">
+        {{ form.submit(class="btn btn-warning") }}
+    </div>
+</form>
+{%endblock%}

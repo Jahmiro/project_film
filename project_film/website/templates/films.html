@@ -1,0 +1,88 @@
+{%extends "base.html"%} {%block title%}Films{% endblock %}
+
+{%block content%}
+    <!--
+       Start main section     
+    -->
+
+    <div class="main-tekst">
+        <h1>Films</h1>
+    </div>
+    <div class="alle-films-box">
+        <div class="film-box">
+            <div class="imgBox">
+                <img src="{{url_for('static', filename='/image/black-panther.jpg')}}"/>
+            </div>
+            <div class="details">
+                <div class="content-films">
+                    <h2>Black Panther</h2>
+                    <p>Marvel’s Black Panther volgt het verhaal van T’Challa, die na de dood van zijn vader, de koning van Wakanda, terugkeert naar huis om zijn rechtmatige plek als koning in te nemen...</p>
+                    <a href="/black-panther"><button class="films-btn">Meer Info</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="film-box">
+            <div class="imgBox">
+                <img src="{{url_for('static', filename='/image/guardians-of-the-galaxy.jpg')}}"/>
+            </div>
+            <div class="details">
+                <div class="content-films">
+                    <h2>Guardians of the Galaxy Vol.2</h2>
+                    <p>Zet je schrap, want het meest buitengewone team van het universum is terug! In Marvel’s Guardians of the Galaxy Vol. 2 gaat het team opnieuw op pad en doorkruisen zij de verste uithoeken van het heelal...</p>
+                    <a href="/guardians-of-the-galaxy"><button class="films-btn">Meer Info</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="film-box">
+            <div class="imgBox">
+                <img src="{{url_for('static', filename='/image/infinity-war.jpg')}}"/>
+            </div>
+            <div class="details">
+                <div class="content-films">
+                    <h2>Avengers Infinity War</h2>
+                    <p>De Marvel Cinematic Universe brengt na 10 jaar de ultieme, meest gevreesde confrontatie aller tijden naar het scherm in de spectaculaire film Marvel's Avengers: Infinity War...</p>
+                    <a href="/infinity-war"><button class="films-btn">Meer Info</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="film-box">
+            <div class="imgBox">
+                <img src="{{url_for('static', filename='/image/thor-ragnarok.jpg')}}"/>
+            </div>
+            <div class="details">
+                <div class="content-films">
+                    <h2>Thor Ragnarok</h2>
+                    <p>In Marvel’s Thor: Ragnarok verliest Thor zijn magische hamer en wordt hij gevangen genomen aan de andere kant van het universum – terwijl Asgard wordt bedreigd door Ragnarok...</p>
+                    <a href="/thor-ragnarok"><button class="films-btn">Meer Info</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="film-box">
+            <div class="imgBox">
+                <img src="{{url_for('static', filename='/image/captain-america.jpg')}}"/>
+            </div>
+            <div class="details">
+                <div class="content-films">
+                    <h2>Captain America Civil War</h2>
+                    <p>In Marvel’s Captain America: Civil War zien we Steve Rogers als leider van het nieuw samengestelde Avengers team met het doel om de mensheid te beschermen.</p>
+                    <a href="/captain-america-civil-war"><button class="films-btn">Meer Info</button></a>
+                </div>
+            </div>
+        </div>
+        <div class="film-box">
+            <div class="imgBox">
+                <img src="{{url_for('static', filename='/image/ant-man.jpg')}}"/>
+            </div>
+            <div class="details">
+                <div class="content-films">
+                    <h2>Ant-Man and the Wasp</h2>
+                    <p>Bijna twee jaar na zijn illegale optreden als superheld in Captain America: Civil War heeft Scott Lang nog een paar dagen te gaan voor zijn enkelband eraf mag en hij zijn huis weer uit mag. Hank Pym en zijn dochter Hope van Dyne hebben in de tussentijd gewerkt aan een tunnel naar...</p>
+                    <a href="/ant-man-and-the-wasp"><button class="films-btn">Meer Info</button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+       End main section     
+    -->
+{%endblock%}

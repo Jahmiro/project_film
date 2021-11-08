@@ -1,0 +1,70 @@
+{%extends "base.html"%} {%block title%}Guardians of the Galaxy Vol.2{% endblock %}
+
+{%block content%}
+<main>
+    <div class="image-box">
+        <img src="{{url_for('static', filename='/image/guardians-of-the-galaxy.jpg')}}"/>
+    </div>
+    <div class="text-box">
+        <h1>Guardians of the Galaxy Vol.2</h1>
+        <h3>Beschrijving</h3>
+        <div class="beschrijving-box">
+            <p>Zet je schrap, want het meest buitengewone team van het universum is terug! In Marvel’s Guardians of the Galaxy Vol. 2 gaat het team opnieuw op pad en doorkruisen zij de verste uithoeken van het heelal.
+                <br>
+                <br>
+                Uiteraard doen ze dit geheel in eigen stijl, op de knallende en onmisbare muziek van Awesome Mixtape Vol. 2. Star-Lord, Gamora, Drax, Rocket en Baby Groot proberen het mysterie te ontrafelen rondom Peter Quill’s vader. Oude vijanden worden nieuwe vrienden en ondertussen moet het team er voor vechten om één te blijven.
+            </p>
+        </div>
+        <p>Cast:</p>
+        {% for acteur in acteurs.items %}
+            {%  if acteur.title == 'Guardians of the Galaxy Vol.2' %}
+                <p><a href="{{ url_for('acteur', acteur_id=acteur.id)}}">{{ acteur.first_name }} {{ acteur.last_name }} </a> Rol: {{ acteur.name_character }}</p>
+            {%endif%}
+        {% endfor %}
+            <a href="/acteur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Acteur toevoegen</button></a>
+            <p>Regisseur:</p>
+        {% for regisseur in regisseurs.items %}
+            {%  if regisseur.title == 'Guardians of the Galaxy Vol.2' %}
+                <a href="{{ url_for('regisseur', regisseur_id=regisseur.id)}}">{{ regisseur.first_name }} {{ regisseur.last_name }} <br></a>
+            {%endif%}
+        {% endfor %}
+            <a href="/regisseur/new"><button class="btn btn-warning ml-5 mb-2 mt-3">Regisseur toevoegen</button></a>
+        <p>Aantal bezoekers: 13 miljoen</p>
+        <p>Behaalde omzet: 1,145 miljard dollar</p>
+    </div>
+    <div class="trailer-box">
+        <iframe src="https://www.youtube.com/embed/wUn05hdkhjM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</main>
+
+<h3 class="m-5">Reacties</h3>
+<a href="/post/new"><button class="btn btn-warning ml-5 mb-2">Reactie plaatsen</button></a>
+{% for post in posts.items %}
+    {% if post.title == 'Guardians of the Galaxy Vol.2' %}
+
+<article class="media content-section m-5">
+  <div class="media-body">
+    <div class="article-metadata">
+      <h5><a href="{{ url_for('user_posts', name=post.author.name) }}">{{ post.author.name.title() }}</a> <small>Geplaatst: {{ post.data_posted.strftime('%d-%h-%Y') }}</small></h5>
+
+    </div>
+    <p> Titel: <a class="article-title" href="{{ url_for('post', post_id=post.id)}}" style="text-align: left;">{{ post.title }}</a></p>
+    <p class="article-content">{{ post.content }}</p>
+  </div>
+</article>
+    {%endif%}
+{% endfor %}
+
+{% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+    {% if page_num %}
+        {% if posts.page == page_num %}
+<a class="btn btn-warning ml-5 mb-5" href="{{ url_for('film2', page=page_num) }}">{{ page_num }}</a>
+    {% else %}
+<a class="btn btn-outline-warning ml-5 mb-5" href="{{ url_for('film2', page=page_num) }}">{{ page_num }}</a>
+        {% endif %}
+    {% else %}
+    ...
+    {% endif %}
+{% endfor %}
+
+{%endblock%}

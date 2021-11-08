@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1 class="mb-3">Posts by {{ user.name }} ({{ posts.total }})</h1>
+    {% for post in posts.items %}
+        <article class="media content-section ml-5 mr-5">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a  href="{{ url_for('user_posts', name=post.author.name) }}">{{ post.author.username }}</a>
+            </div>
+            <h2><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+            <small class="text-muted">{{ post.data_posted.strftime('%Y-%m-%d') }}</small>
+            <p class="article-content">{{ post.content }}</p>
+            <p class="border-bottom"></p>
+          </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

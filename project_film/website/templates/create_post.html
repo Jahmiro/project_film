@@ -1,0 +1,45 @@
+{%extends "base.html"%} {%block title%}Plaats reactie{% endblock %}
+
+{%block content%}
+
+<form class="bg-transparent" " method="POST" action="" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">{{legend}}</legend>
+        <!--Titel-->
+        <div class="form-group">
+            <div class="form-group">
+                {{ form.title.label }}
+                {% if form.title.errors %}
+                    {{ form.title(class="is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.title.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.title }}
+                {% endif %}
+            </div>
+        
+        <!--Reactie toevoegen-->
+        <div class="form-group">
+            {{ form.content.label }}
+            {% if form.content.errors %}
+                {{ form.content(class="is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in form.content.errors %}
+                        <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+            {% else %}
+                {{ form.content(placeholder="Typ hier uw reactie", rows='10',cols='50',style="resize: none;") }}
+            {% endif %}
+        </div>
+    </fieldset>
+
+    <div class="form-group" style="padding-bottom: 200px;">
+        {{ form.submit(class="btn btn-warning") }}
+    </div>
+</form>
+{%endblock%}
