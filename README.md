@@ -11,3 +11,4 @@ Om het project te starten heeft u het programma “Visual Studio Code” nodig w
 4   Dan krijgt u een zin te zien dat lijkt op “* Running on http:// 127.0.0.1:5000/ (Press CTRL+C to quit)”.
 
 5   Kopieer en plak vervolgens het stuk dat hierop lijkt “http:// 127.0.0.1:5000/ “ in uw webbrowser.
+
